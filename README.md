@@ -1,4 +1,4 @@
-# [pyp-w1-a1] Language Detector
+# [pyp-w1] Language Detector
 
 You will need to build a program that is able to detect the language of certain piece of text given by the user. For that you will need to respect the following interface:
 
