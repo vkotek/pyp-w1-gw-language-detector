@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from main import detect_language
+from language_detector import detect_language
 
 
 class TestLanguageDetector(unittest.TestCase):
