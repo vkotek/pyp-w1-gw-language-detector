@@ -70,12 +70,12 @@ class TestLanguageDetector(unittest.TestCase):
 
     def test_detect_language_spanish(self):
         result = detect_language(self.texts["spanish"], self.languages)
-        self.assertEqual(result, 'Spanish')
+        self.assertEqual(result.lower(), 'spanish')
 
     def test_detect_language_german(self):
         result = detect_language(self.texts["german"], self.languages)
-        self.assertEqual(result, 'German')
+        self.assertEqual(result.lower(), 'german')
 
     def test_detect_language_mixed_languages(self):
         result = detect_language(self.texts["mostly-spanish"], self.languages)
-        self.assertEqual(result, 'Spanish')
+        self.assertEqual(result.lower(), 'spanish')
