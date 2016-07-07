@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from language_detector import detect_language
+from language_detector import detect_language, LANGUAGES
 
 
 class TestLanguageDetector(unittest.TestCase):
@@ -33,47 +33,61 @@ class TestLanguageDetector(unittest.TestCase):
                 ]
             }
         ]
+        self.texts = {
+            "spanish": """
+                Lionel Andrés Messi Cuccittini (Rosario, 24 de junio de 1987),
+                conocido como Leo Messi, es un futbolista argentino11 que juega
+                como delantero en el Fútbol Club Barcelona y en la selección
+                argentina, de la que es capitán. Considerado con frecuencia el
+                mejor jugador del mundo y calificado en el ámbito deportivo como el
+                más grande de todos los tiempos, Messi es el único futbolista en la
+                historia que ha ganado cinco veces el FIFA Balón de Oro –cuatro de
+                ellos en forma consecutiva– y el primero en
+                recibir tres Botas de Oro.
+                """,
+            "german": """
+                Messi spielt seit seinem 14. Lebensjahr für den FC Barcelona.
+                Mit 24 Jahren wurde er Rekordtorschütze des FC Barcelona, mit 25
+                der jüngste Spieler in der La-Liga-Geschichte, der 200 Tore
+                erzielte. Inzwischen hat Messi als einziger Spieler mehr als 300
+                Erstligatore erzielt und ist damit Rekordtorschütze
+                der Primera División.
+                """,
+            "mostly-spanish": """
+                # spanish
+                Lionel Andrés Messi Cuccittini (Rosario, 24 de junio de 1987),
+                conocido como Leo Messi, es un futbolista argentino11 que juega
+                como delantero en el Fútbol Club Barcelona y en la selección
+                argentina, de la que es capitán.
+    
+                # german
+                Messi spielt seit seinem 14. Lebensjahr für den FC Barcelona.
+                Mit 24 Jahren wurde er Rekordtorschütze des FC Barcelona, mit 25
+                der jüngste Spieler in der La-Liga-Geschichte, der 200 Tore
+                erzielte.
+                """
+        }
 
-    def test_detect_language_spanish(self):
-        text = """
-            Lionel Andrés Messi Cuccittini (Rosario, 24 de junio de 1987),
-            conocido como Leo Messi, es un futbolista argentino11 que juega
-            como delantero en el Fútbol Club Barcelona y en la selección
-            argentina, de la que es capitán. Considerado con frecuencia el
-            mejor jugador del mundo y calificado en el ámbito deportivo como el
-            más grande de todos los tiempos, Messi es el único futbolista en la
-            historia que ha ganado cinco veces el FIFA Balón de Oro –cuatro de
-            ellos en forma consecutiva– y el primero en
-            recibir tres Botas de Oro.
-        """
-        result = detect_language(text, self.languages)
-        self.assertEqual(result, 'Spanish')
+    def test_detect_language_spanish_with_our_language_specification(self):
+        result = detect_language(self.texts["spanish"], self.languages)
+        self.assertEqual(result.lower(), 'spanish')
+        
+    def test_detect_language_spanish_with_module_language_specification(self):
+        result = detect_language(self.texts["spanish"], LANGUAGES)
+        self.assertEqual(result.lower(), 'spanish')
 
-    def test_detect_language_german(self):
-        text = """
-            Messi spielt seit seinem 14. Lebensjahr für den FC Barcelona.
-            Mit 24 Jahren wurde er Rekordtorschütze des FC Barcelona, mit 25
-            der jüngste Spieler in der La-Liga-Geschichte, der 200 Tore
-            erzielte. Inzwischen hat Messi als einziger Spieler mehr als 300
-            Erstligatore erzielt und ist damit Rekordtorschütze
-            der Primera División.
-        """
-        result = detect_language(text, self.languages)
-        self.assertEqual(result, 'German')
+    def test_detect_language_german_with_our_language_specification(self):
+        result = detect_language(self.texts["german"], self.languages)
+        self.assertEqual(result.lower(), 'german')
+        
+    def test_detect_language_german_with_module_language_specification(self):
+        result = detect_language(self.texts["german"], LANGUAGES)
+        self.assertEqual(result.lower(), 'german')
 
-    def test_detect_language_mixed_languages(self):
-        text = """
-            # spanish
-            Lionel Andrés Messi Cuccittini (Rosario, 24 de junio de 1987),
-            conocido como Leo Messi, es un futbolista argentino11 que juega
-            como delantero en el Fútbol Club Barcelona y en la selección
-            argentina, de la que es capitán.
-
-            # german
-            Messi spielt seit seinem 14. Lebensjahr für den FC Barcelona.
-            Mit 24 Jahren wurde er Rekordtorschütze des FC Barcelona, mit 25
-            der jüngste Spieler in der La-Liga-Geschichte, der 200 Tore
-            erzielte.
-        """
-        result = detect_language(text, self.languages)
-        self.assertEqual(result, 'Spanish')
+    def test_detect_language_mixed_with_our_language_specification(self):
+        result = detect_language(self.texts["mostly-spanish"], self.languages)
+        self.assertEqual(result.lower(), 'spanish')
+        
+    def test_detect_language_mixed_with_module_language_specification(self):
+        result = detect_language(self.texts["mostly-spanish"], LANGUAGES)
+        self.assertEqual(result.lower(), 'spanish')
