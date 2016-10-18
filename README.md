@@ -28,4 +28,6 @@ Language detection is not magic. It's just a matter of counting how many of the 
 
 You are responsible of defining the set of the most used words in each of the languages you want to support. As a requirement of this group work, we ask you to support at least 3 languages, including: english, spanish and german.
 
-**Get extra credit for +95% code coverage**
+**Ideas for enhancements in case of extra time:**
+- Solve with regexes (adjusting and/or adding tests might be needed for this)
+- Stats (What word is most common, percentage of languages etc etc)
