@@ -33,8 +33,8 @@ setup(
     maintainer='rmotr.com',
     tests_require=[
         'pytest==3.0.3',
-        'pytest-cov==2.2.1',
-        'coverage==4.0.3',
+        'pytest-cov==2.4.0',
+        'coverage==4.2',
     ],
     zip_safe=False,
     cmdclass={'test': PyTest},
