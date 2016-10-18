@@ -32,9 +32,9 @@ setup(
     packages=['language_detector'],
     maintainer='rmotr.com',
     tests_require=[
-        'pytest==2.9.1',
-        'pytest-cov==2.2.1',
-        'coverage==4.0.3'
+        'pytest==3.0.3',
+        'pytest-cov==2.4.0',
+        'coverage==4.2',
     ],
     zip_safe=False,
     cmdclass={'test': PyTest},
