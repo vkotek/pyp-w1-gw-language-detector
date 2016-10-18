@@ -34,7 +34,8 @@ setup(
     tests_require=[
         'pytest==2.9.1',
         'pytest-cov==2.2.1',
-        'coverage==4.0.3'
+        'coverage==4.0.3',
+        'tox==2.3.1',
     ],
     zip_safe=False,
     cmdclass={'test': PyTest},
